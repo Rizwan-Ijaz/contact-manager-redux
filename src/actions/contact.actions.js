@@ -1,9 +1,15 @@
 import types from "./types";
+import axios from 'axios';
 
-export const getContacts = () => {
-    return {
-        type: types.GET_CONTACTS
-    }
+const API_URL = 'https://jsonplaceholder.typicode.com/users';
+
+export const getContacts = () => async dispatch => {
+    const response = await axios.get(API_URL);
+
+    dispatch({
+        type: types.GET_CONTACTS,
+        payload: response.data
+    });
 };
 
 export const addContact = (contact) => {
